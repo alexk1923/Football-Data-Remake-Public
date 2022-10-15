@@ -55,6 +55,5 @@
   "devDependencies": {
     "@types/aos": "^3.0.4",
     "@types/react-scroll": "^1.8.4"
-  },
-  "proxy": "http://localhost:8000"
+  }
 }
