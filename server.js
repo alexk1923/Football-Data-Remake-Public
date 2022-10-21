@@ -14,12 +14,16 @@ app.listen(PORT, () => {
     console.log("Server started on port: " + PORT);
 })
 
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname + "/public/index.html"));
+})
+
 const fetchHeaders = {
     "x-rapidapi-host": "v3.football.api-sports.io",
     "x-rapidapi-key": process.env.API_KEY,
 };
 
-app.get("/countries", (req, res) => {
+app.get("api/countries", (req, res) => {
     async function fetchCountries() {
         const responseAPI = await fetch("https://v3.football.api-sports.io/countries", {
             method: "GET",
@@ -36,7 +40,7 @@ app.get("/countries", (req, res) => {
     }
     fetchCountries();
 })
-app.get("/teams/:countryName", (req, res) => {
+app.get("api/teams/:countryName", (req, res) => {
     async function fetchTeamsFromCountry() {
         const responseAPI = await fetch(
             `https://v3.football.api-sports.io/teams?country=${req.params.countryName}`,
@@ -57,7 +61,7 @@ app.get("/teams/:countryName", (req, res) => {
     fetchTeamsFromCountry();
 })
 
-app.get("/league/:teamID", (req, res) => {
+app.get("api/league/:teamID", (req, res) => {
     async function fetchLeagueByTeamID() {
         const responseAPI = await fetch(
             `https://v3.football.api-sports.io/leagues?team=${req.params.teamID}&type=league&current=true`,
@@ -78,7 +82,7 @@ app.get("/league/:teamID", (req, res) => {
     fetchLeagueByTeamID();
 })
 
-app.get("/standings/:leagueID", (req, res) => {
+app.get("api/standings/:leagueID", (req, res) => {
     async function fetchStandings() {
         const responseAPI = await fetch(
             `https://v3.football.api-sports.io/standings?league=${req.params.leagueID
@@ -100,7 +104,7 @@ app.get("/standings/:leagueID", (req, res) => {
     fetchStandings();
 })
 
-app.get("/fixtures/:teamID", (req, res) => {
+app.get("api/fixtures/:teamID", (req, res) => {
     async function fetchFixturesByTeamID() {
         const responseAPI = await fetch(
             `https://v3.football.api-sports.io/fixtures?team=${req.params.teamID

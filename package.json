@@ -8,8 +8,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.11.60",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
     "aos": "^2.3.4",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -54,6 +52,8 @@
   },
   "devDependencies": {
     "@types/aos": "^3.0.4",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "@types/react-scroll": "^1.8.4"
   }
 }
