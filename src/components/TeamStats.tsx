@@ -122,7 +122,7 @@ export default function Stats() {
 	// get all fixtures by team id
 	useEffect(() => {
 		async function fetchFixturesByTeamID() {
-			const res = await fetch(`api/${favTeam.team.id}`);
+			const res = await fetch(`api/fixtures/${favTeam.team.id}`);
 			try {
 				const fixtures: Fixture[] = await res.json();
 

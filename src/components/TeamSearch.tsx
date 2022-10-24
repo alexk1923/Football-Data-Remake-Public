@@ -21,7 +21,7 @@ export default function TeamSearch() {
 	// get teams from selected country
 	useEffect(() => {
 		async function fetchTeamsFromCountry() {
-			const res = await fetch(`api/teams/${selectedCountry}`);
+			const res = await fetch(`/api/teams/${selectedCountry}`);
 			try {
 				const teams: TeamInfoType[] = await res.json();
 				setTeams(teams);
@@ -38,8 +38,7 @@ export default function TeamSearch() {
 	// get all countries from the API
 	useEffect(() => {
 		async function fetchCountries() {
-			const res = await fetch("api/countries");
-
+			const res = await fetch("/api/countries");
 			try {
 				const countries: CountryInfoType[] = await res.json();
 				setCountries(countries);

@@ -8,22 +8,20 @@ const path = require('path')
 
 app.use(cors())
 
-app.use(express.static(path.join(__dirname + "/public")));
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.listen(PORT, () => {
     console.log("Server started on port: " + PORT);
 })
 
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname + "/public/index.html"));
-})
 
 const fetchHeaders = {
     "x-rapidapi-host": "v3.football.api-sports.io",
     "x-rapidapi-key": process.env.API_KEY,
 };
 
-app.get("api/countries", (req, res) => {
+app.get("/api/countries", (req, res) => {
+
     async function fetchCountries() {
         const responseAPI = await fetch("https://v3.football.api-sports.io/countries", {
             method: "GET",
@@ -32,6 +30,7 @@ app.get("api/countries", (req, res) => {
 
         try {
             const data = await responseAPI.json();
+
             res.send(data.response);
         } catch (error) {
             console.log("Error:" + error);
@@ -40,7 +39,7 @@ app.get("api/countries", (req, res) => {
     }
     fetchCountries();
 })
-app.get("api/teams/:countryName", (req, res) => {
+app.get("/api/teams/:countryName", (req, res) => {
     async function fetchTeamsFromCountry() {
         const responseAPI = await fetch(
             `https://v3.football.api-sports.io/teams?country=${req.params.countryName}`,
@@ -61,7 +60,7 @@ app.get("api/teams/:countryName", (req, res) => {
     fetchTeamsFromCountry();
 })
 
-app.get("api/league/:teamID", (req, res) => {
+app.get("/api/league/:teamID", (req, res) => {
     async function fetchLeagueByTeamID() {
         const responseAPI = await fetch(
             `https://v3.football.api-sports.io/leagues?team=${req.params.teamID}&type=league&current=true`,
@@ -82,7 +81,8 @@ app.get("api/league/:teamID", (req, res) => {
     fetchLeagueByTeamID();
 })
 
-app.get("api/standings/:leagueID", (req, res) => {
+app.get("/api/standings/:leagueID", (req, res) => {
+
     async function fetchStandings() {
         const responseAPI = await fetch(
             `https://v3.football.api-sports.io/standings?league=${req.params.leagueID
@@ -104,7 +104,9 @@ app.get("api/standings/:leagueID", (req, res) => {
     fetchStandings();
 })
 
-app.get("api/fixtures/:teamID", (req, res) => {
+app.get("/api/fixtures/:teamID", (req, res) => {
+
+    console.log(req.params.teamID);
     async function fetchFixturesByTeamID() {
         const responseAPI = await fetch(
             `https://v3.football.api-sports.io/fixtures?team=${req.params.teamID
@@ -127,6 +129,10 @@ app.get("api/fixtures/:teamID", (req, res) => {
     }
 
     fetchFixturesByTeamID();
+})
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "/public/index.html"));
 })
 
 
