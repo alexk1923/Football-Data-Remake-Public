@@ -30,7 +30,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "heroku-postbuild": "npm install && npm run build",
+    "heroku-postbuild": "npm install && npm install react-scroll && npm install --save-dev types@react-scroll && npm run build",
     "start": "nodemon server.js",
     "start-react": "react-scripts start",
     "build": "react-scripts build",
