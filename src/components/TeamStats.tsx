@@ -87,7 +87,7 @@ export default function Stats() {
 	// get the league the favorite team is playing in
 	useEffect(() => {
 		async function fetchLeagueByTeamID() {
-			const res = await fetch(`api/league/${favTeam.team.id}`);
+			const res = await fetch(`/api/league/${favTeam.team.id}`);
 			try {
 				const leagueDetailed: LeagueDetailed[] = await res.json();
 				setLeague(leagueDetailed[0].league);
@@ -103,7 +103,7 @@ export default function Stats() {
 	// get the standings by league id
 	useEffect(() => {
 		async function fetchStandings() {
-			const res = await fetch(`api/standings/${league?.id}`);
+			const res = await fetch(`/api/standings/${league?.id}`);
 			try {
 				const allStandings: Standings[] = await res.json();
 				console.log(allStandings);
@@ -122,7 +122,7 @@ export default function Stats() {
 	// get all fixtures by team id
 	useEffect(() => {
 		async function fetchFixturesByTeamID() {
-			const res = await fetch(`api/fixtures/${favTeam.team.id}`);
+			const res = await fetch(`/api/fixtures/${favTeam.team.id}`);
 			try {
 				const fixtures: Fixture[] = await res.json();
 

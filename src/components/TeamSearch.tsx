@@ -42,6 +42,7 @@ export default function TeamSearch() {
 			try {
 				const countries: CountryInfoType[] = await res.json();
 				setCountries(countries);
+				console.log("GOT COUNTRIES!!");
 			} catch (err) {
 				console.log(err);
 			}
